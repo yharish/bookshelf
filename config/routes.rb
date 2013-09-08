@@ -1,13 +1,14 @@
 Bookshelf::Application.routes.draw do
-  get "static_pages/home"
+get "users/new"
 
-  get "static_pages/help"
+  root to: "static_pages#home"
 
-  get "static_pages/about"
+  match '/help', to: 'static_pages#help'
+  match '/about', to: 'static_pages#about'
+  match '/terms', to: 'static_pages#terms'
+  match '/privacy', to: 'static_pages#privacy'
 
-  get "static_pages/terms"
-
-  get "static_pages/privacy"
+  match '/signup', to: 'users#new'
 
   resources :users
   resources :books
