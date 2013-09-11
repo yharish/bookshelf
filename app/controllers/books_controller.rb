@@ -9,19 +9,11 @@ class BooksController < ApplicationController
 	end
 
 	def create
-
 		@book = Book.new(params[:book])
-		
-        @user = User.find(1)
-        @bookuser = BooksUsers.new
-        @bookuser.book_id = @book.id
-        #@bookuser.user_id = @user.id
-        @bookuser.user_id = 1
-        @bookuser.save
+        @user = current_user
+        @book.users << User.find(current_user.id)
         @book.save
-
-        redirect_to users_path
-    
+        redirect_to user_path
 	end
 
 	def show
@@ -44,5 +36,11 @@ class BooksController < ApplicationController
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
+	end
+
+	def destroy
+    	@book = Book.find(params[:id])
+    	@book.destroy
+    	redirect_to root_path
 	end
 end

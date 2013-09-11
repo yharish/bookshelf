@@ -3,11 +3,13 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.14'
 gem 'bootstrap-sass', '2.1'
 gem 'sextant'
+gem 'devise'
+gem 'bcrypt-ruby', '3.1.2'
 
 group :development do
   gem 'sqlite3', '1.3.5'
-  
-gem 'debugger'
+  gem 'annotate', '2.5.0'
+  gem 'debugger'
 end
 
 

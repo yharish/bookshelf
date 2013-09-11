@@ -1,15 +1,23 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<% provide(:title, current_user.email) %>
+<div class="row" style="margin-top:80px">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for current_user %>
+        <%= current_user.email %>
+      </h1>
+    </section>
+  </aside>
+</div>
+<div><%= link_to 'Add book', new_book_path(@book) %></div>
+<div>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+         <% current_user.books.each do |book| %>
+            
+              <%= book.book_name %>
+              <%= book.author %>
 
+          <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+ </div>
