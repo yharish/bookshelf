@@ -12,5 +12,6 @@ Bookshelf::Application.routes.draw do
 
   resources :users
   resources :books
+  resources :ownerships
 
 end

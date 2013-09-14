@@ -12,12 +12,33 @@
 </div>
 <div><%= link_to 'Add book', new_book_path(@book) %></div>
 <div>
-
          <% current_user.books.each do |book| %>
-            
               <%= book.book_name %>
               <%= book.author %>
+              <%= book.category %>
 
+              
           <% end %>
+</div>
+<div>
+  <% current_user.books.each do |book| %>
+      <% if book.category == 'Reading' %>
+            <%= book.book_name %>
+      <% end %>
+  <% end %>
+</div>
+<div>
+  <% current_user.books.each do |book| %>
+      <% if book.category == 'Has Read' %>
+            <%= book.book_name %>
+      <% end %>
+  <% end %>
+</div>
+<div>
+  <% current_user.books.each do |book| %>
+      <% if book.category == 'Will Read' %>
+            <%= book.book_name %>
+      <% end %>
+  <% end %>
+</div>
 
- </div>

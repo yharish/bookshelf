@@ -5,7 +5,10 @@ class BooksController < ApplicationController
 	end
 
 	def new
+		@user = current_user
 		@book = Book.new
+        
+
 	end
 
 	def create
@@ -13,6 +16,7 @@ class BooksController < ApplicationController
         @user = current_user
         @book.users << User.find(current_user.id)
         @book.save
+        
         redirect_to user_path
 	end
 
