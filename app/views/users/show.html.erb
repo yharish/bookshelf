@@ -1,44 +1,62 @@
 
 <% provide(:title, current_user.email) %>
-<div class="row" style="margin-top:80px">
+<div class="row">
   <aside class="span4">
     <section>
+      <div><%= gravatar_for current_user %></div>
       <h1>
-        <%= gravatar_for current_user %>
         <%= current_user.email %>
       </h1>
     </section>
   </aside>
 </div>
 <div><%= link_to 'Add book', new_book_path(@book) %></div>
-<div>
-         <% current_user.books.each do |book| %>
-              <%= book.book_name %>
-              <%= book.author %>
-              <%= book.category %>
 
-              
-          <% end %>
-</div>
-<div>
-  <% current_user.books.each do |book| %>
-      <% if book.category == 'Reading' %>
-            <%= book.book_name %>
-      <% end %>
-  <% end %>
-</div>
-<div>
-  <% current_user.books.each do |book| %>
-      <% if book.category == 'Has Read' %>
-            <%= book.book_name %>
-      <% end %>
-  <% end %>
-</div>
-<div>
-  <% current_user.books.each do |book| %>
-      <% if book.category == 'Will Read' %>
-            <%= book.book_name %>
-      <% end %>
-  <% end %>
+<div class="container-fluid" style="margin-top:10px; padding:0">
+    <div class="row-fluid">
+        <div class="span8 well">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#allBooks" data-target="#allBooks" data-toggle="tab">All Books</a></li>
+                <li > <a href="#reading" data-target="#reading" data-toggle="tab">Reading</a></li>
+                <li><a href="#hasRead" data-target="#hasRead" data-toggle="tab">Has Read</a></li>
+                <li><a href="#willRead" data-target="#willRead" data-toggle="tab">Will Read</a></li>
+            </ul>
+            <div class="tab-content">
+                 <div class="tab-pane active fade in" id="allBooks">
+                  <% @books.each do |book| %>
+                    
+                <div id="bookList">
+                  <%= book.book_name %></br>
+                    <i>by </i><%= book.author %></br>
+                    <%= link_to 'Edit', edit_book_path(book) %> |
+                    <%= link_to 'Delete', book_path(book), :method => :delete, :remote => true, :confirm => "Are you sure you want to delete this book?", :class => "delete_book" %></br></br></div>
+                  <% end %>
+                  <%= will_paginate @books, :param_name => 'books_page' %>
+                </div>
+
+                <div class="tab-pane" id="reading">
+                  <% @readingBooks.each do |book| %>
+                      <%= book.book_name %></br>
+                  <% end %>
+                  <%= will_paginate @readingBooks, :param_name => 'readingBooks_page' %>
+                </div>
+
+                <div class="tab-pane" id="hasRead">
+                <% @hasReadBooks.each do |book| %>
+                      <%= book.book_name %></br>
+                  <% end %>
+                  <%= will_paginate @hasReadBooks, :param_name => 'hasReadBooks_page' %>
+                </div>
+
+                <div class="tab-pane" id="willRead">
+                  <% @willReadBooks.each do |book| %>
+                      <%= book.book_name %></br>
+                    <% end %>
+                  <%= will_paginate @willReadBooks, :param_name => 'willReadBooks_page' %>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 

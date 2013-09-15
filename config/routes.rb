@@ -1,5 +1,7 @@
 Bookshelf::Application.routes.draw do
   devise_for :users
+  resources :users
+  resources :books
 
   root to: "static_pages#home"
 
@@ -10,8 +12,11 @@ Bookshelf::Application.routes.draw do
   
   match '/user', to: 'users#show'
 
-  resources :users
-  resources :books
-  resources :ownerships
+  get 'static_pages/help'
+  get 'static_pages/home'
+  get 'static_pages/about'
+  get 'static_pages/terms'
+  get 'static_pages/privacy'
+  get '/users/sign_up'
 
 end

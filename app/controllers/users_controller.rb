@@ -7,6 +7,16 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @books = Book.paginate(:per_page => 5, :page => params[:books_page])
+   
+    @readingBooks = Book.where(:category => 'Reading')    # @records = Model.where(:some_column => some_value)
+    @readingBooks = @readingBooks.paginate(:per_page => 5, :page => params[:readingBooks_page])
+
+    @hasReadBooks = Book.where(:category => 'Has Read')
+    @hasReadBooks = @hasReadBooks.paginate(:per_page => 5, :page => params[:hasReadBooks_page])
+
+    @willReadBooks = Book.where(:category => 'Will Read') 
+    @willReadBooks = @willReadBooks.paginate(:per_page => 5, :page => params[:willReadBooks])
   end
 
   def new
@@ -28,18 +38,20 @@ class UsersController < ApplicationController
     end
   end
 
-
   def update
     @user = User.find(params[:id])
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    # @user = User.find(params[:id])
+    # @user.destroy
 
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+    @book = Book.find(params[:id])
+      respond_to do |format|  
+        if @book.destroy
+          format.html { redirect_to user_path, notice: 'Book was successfully deleted.' }  
+          format.js   { render :nothing => true }  
+        end
+      end 
   end
 end

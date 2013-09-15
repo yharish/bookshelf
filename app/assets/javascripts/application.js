@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap
+//= require_tree  .
+
+$(document).ready(function() {
+$('.delete_book').live('ajax:success', function() {
+$(this).closest('div').fadeOut();
+});
+});
