@@ -10,7 +10,7 @@
     </section>
   </aside>
 </div>
-<div><%= link_to 'Add book', new_book_path(@book) %></div>
+<div style="font-size:14px; font-weight:bold"><%= link_to 'Add book', new_book_path(@book) %></div>
 
 <div class="container-fluid" style="margin-top:10px; padding:0">
     <div class="row-fluid">
@@ -37,20 +37,23 @@
                 <div class="tab-pane" id="reading">
                   <% @readingBooks.each do |book| %>
                       <%= book.book_name %></br>
+                    <i>by </i><%= book.author %></br></br>
                   <% end %>
                   <%= will_paginate @readingBooks, :param_name => 'readingBooks_page' %>
                 </div>
 
                 <div class="tab-pane" id="hasRead">
                 <% @hasReadBooks.each do |book| %>
-                      <%= book.book_name %></br>
+                       <%= book.book_name %></br>
+                    <i>by </i><%= book.author %></br></br>
                   <% end %>
                   <%= will_paginate @hasReadBooks, :param_name => 'hasReadBooks_page' %>
                 </div>
 
                 <div class="tab-pane" id="willRead">
                   <% @willReadBooks.each do |book| %>
-                      <%= book.book_name %></br>
+                       <%= book.book_name %></br>
+                    <i>by </i><%= book.author %></br></br>
                     <% end %>
                   <%= will_paginate @willReadBooks, :param_name => 'willReadBooks_page' %>
                 </div>

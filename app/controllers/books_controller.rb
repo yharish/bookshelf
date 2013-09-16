@@ -17,7 +17,7 @@ class BooksController < ApplicationController
         respond_to do |format|
 	      if @book.save
 	        format.html { redirect_to user_path, notice: 'Book was successfully created.' }
-	        format.json { render json: user_path, status: :created, location: @book }
+	        format.xml { render xml: @book, status: :created, location: @book }
 	      else
 	        format.html { render action: "new" }
 	        format.json { render json: @book.errors, status: :unprocessable_entity }

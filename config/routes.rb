@@ -1,7 +1,6 @@
 Bookshelf::Application.routes.draw do
   devise_for :users
-  resources :users
-  resources :books
+
 
   root to: "static_pages#home"
 
@@ -18,5 +17,8 @@ Bookshelf::Application.routes.draw do
   get 'static_pages/terms'
   get 'static_pages/privacy'
   get '/users/sign_up'
+
+  resources :users
+  resources :books
 
 end
